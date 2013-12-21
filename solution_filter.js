@@ -1,9 +1,10 @@
 var fs = require('fs');
 module.exports = function(dir, filterStr, callback) {
-	var regex = new RegExp('\\.' + process.argv[3] + '$');
+	var regex = new RegExp('\\.' + filterStr + '$');
 
 	fs.readdir(dir, function(err, list) {
-		if (err) throw err;
+		if (err)
+			return callback(err);
 		list = list.filter(function (file) {
 			return regex.test(file);
 		});
